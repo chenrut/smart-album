@@ -2,14 +2,13 @@ package com.example.login;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Looper;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
@@ -27,43 +26,28 @@ import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
 
-@Route(path = "/Login/LoginActivity")
-public class LoginActivity extends AppCompatActivity {
+@Route(path = "/Login/RegisterActivity")
+public class RegisterActivity extends AppCompatActivity {
 
     private EditText edt_account;
     private EditText edt_password;
-    private Button btn_login;
-    private TextView account_register;
+    private Button btn_register;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login);
+        setContentView(R.layout.activity_register_acitivity);
         initView();
-        account_register.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(LoginActivity.this,RegisterActivity.class);
-                startActivityForResult(intent,1);
-            }
-        });
-        btn_login.setOnClickListener(new View.OnClickListener() {
+        btn_register.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 String account = edt_account.getText().toString().trim();
                 String password = edt_password.getText().toString().trim();
-                login(account,password);
+                register(account,password);
             }
         });
-
-    }
-    private void initView(){
-        edt_account = findViewById(R.id.et_account);
-        edt_password = findViewById(R.id.et_pwd);
-        btn_login = findViewById(R.id.btn_login);
-        account_register = findViewById(R.id.tv_account_register);
     }
 
-    private void login(String account,String password){
+    private void register(final String account, final String password) {
         if(StringUtils.isEmpty(account)){
             Toast.makeText(this,"请输入账号",Toast.LENGTH_SHORT).show();
             return;
@@ -74,12 +58,12 @@ public class LoginActivity extends AppCompatActivity {
         }
         OkHttpClient client = new OkHttpClient.Builder()
                 .build();
-        RequestBody requestBody = new FormBody.Builder()
-                .add("user_name",account)
+        RequestBody requestBody = new FormBody.Builder().
+                add("user_name",account)
                 .add("password",password)
                 .build();
         Request request = new Request.Builder()
-                .url("http:/10.0.2.2:80" + "/user/login")
+                .url("http:/10.0.2.2:80" + "/user/reg")
                 .post(requestBody)
                 .build();
         //第四步创建call回调对象
@@ -97,25 +81,23 @@ public class LoginActivity extends AppCompatActivity {
                 Gson gson = new Gson();
                 LoginResponse loginResponse = gson.fromJson(result,LoginResponse.class);
                 if(loginResponse.getData()){
-
+                    Intent intent = new Intent();
+                    intent.putExtra("user_name",account);
+                    intent.putExtra("password",password);
+                    setResult(RESULT_OK,intent);
+                    finish();
+                }else{
+                    Looper.prepare();
+                    Toast.makeText(RegisterActivity.this,loginResponse.getMsg(),Toast.LENGTH_SHORT).show();
+                    Looper.loop();
                 }
             }
         });
     }
 
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        switch (requestCode) {
-            case 1:
-                if(resultCode == RESULT_OK){
-                    String account = data.getStringExtra("user_name");
-                    String password = data.getStringExtra("password");
-                    edt_account.setText(account);
-                    edt_password.setText(password);
-                }
-                break;
-            default:
-        }
+    private void initView(){
+        edt_account = findViewById(R.id.et_account);
+        edt_password = findViewById(R.id.et_pwd);
+        btn_register = findViewById(R.id.btn_register);
     }
 }
