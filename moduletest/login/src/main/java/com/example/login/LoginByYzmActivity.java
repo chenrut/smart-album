@@ -107,8 +107,8 @@ public class LoginByYzmActivity extends AppCompatActivity {
     }
 
     private void login(final String phoneNumber, String yzm){
-        if(StringUtils.isEmpty(phoneNumber)){
-            Toast.makeText(this,"请输入手机号",Toast.LENGTH_SHORT).show();
+        if(!MobileUtil.checkPhone(phoneNumber)){
+            Toast.makeText(this,"请输入正确的11位手机号",Toast.LENGTH_SHORT).show();
             return;
         }
         if(StringUtils.isEmpty(yzm)){

@@ -69,7 +69,7 @@ public class ChangePasswordActivity extends AppCompatActivity {
                         }
                     });
                 }else{
-                    Toast.makeText(ChangePasswordActivity.this,"手机号码输入错误",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(ChangePasswordActivity.this,"请输入正确的11位手机号",Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -94,8 +94,8 @@ public class ChangePasswordActivity extends AppCompatActivity {
     }
 
     private void changePassword(String phone,String password,String yzm){
-        if(StringUtils.isEmpty(phone)){
-            Toast.makeText(this,"请输入手机号",Toast.LENGTH_SHORT).show();
+        if(!MobileUtil.checkPhone(phone)){
+            Toast.makeText(this,"请输入正确的11位手机号",Toast.LENGTH_SHORT).show();
             return;
         }
         if(StringUtils.isEmpty(password) || !(password.length() >= 6 && password.length() <= 20)){

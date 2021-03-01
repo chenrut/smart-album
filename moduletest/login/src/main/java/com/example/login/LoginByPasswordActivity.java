@@ -14,6 +14,7 @@ import android.widget.Toast;
 import com.example.login.api.Api;
 import com.example.login.api.ApiConfig;
 import com.example.login.api.MyLoginCallback;
+import com.example.login.util.MobileUtil;
 import com.example.login.util.StringUtils;
 
 public class LoginByPasswordActivity extends AppCompatActivity {
@@ -61,8 +62,8 @@ public class LoginByPasswordActivity extends AppCompatActivity {
     }
 
     private void login(String phoneNumber,String password){
-        if(StringUtils.isEmpty(phoneNumber)){
-            Toast.makeText(this,"请输入手机号",Toast.LENGTH_SHORT).show();
+        if(!MobileUtil.checkPhone(phoneNumber)){
+            Toast.makeText(this,"请输入正确的11位手机号",Toast.LENGTH_SHORT).show();
             return;
         }
         if(StringUtils.isEmpty(password)){
