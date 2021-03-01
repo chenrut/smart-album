@@ -33,12 +33,9 @@ dependencies {
     implementation fileTree(dir: "libs", include: ["*.jar"])
     implementation project(":common")
     api rootProject.ext.annotationLibs
-
     if (!ismodule.toBoolean()){
         implementation project(":login")
     }
-
-
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'

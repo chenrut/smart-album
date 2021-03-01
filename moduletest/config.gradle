@@ -19,7 +19,6 @@ ext{
     commonDeps = [
             "arouter_api"          : 'com.alibaba:arouter-api:1.5.1',
             "glide"                : 'com.github.bumptech.glide:glide:4.11.0'
-
     ]
 
     annotationDeps = [
