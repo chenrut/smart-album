@@ -13,13 +13,13 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Design.NoActionBar">
-        <activity android:name=".ChangePasswordActivity">
+        <activity android:name=".activity.ChangePasswordActivity">
         </activity>
-        <activity android:name=".SetNewPasswordActivity" >
+        <activity android:name=".activity.SetNewPasswordActivity" >
         </activity>
-        <activity android:name=".LoginByPasswordActivity" />
+        <activity android:name=".activity.LoginByPasswordActivity" />
         <activity
-            android:name=".LoginByYzmActivity"
+            android:name=".activity.LoginByYzmActivity"
             android:launchMode="singleTask">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

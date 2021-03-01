@@ -1,4 +1,4 @@
-package com.example.login;
+package com.example.login.service;
 
 import com.example.common.Service.LoginService;
 import com.example.login.util.AccountUtils;

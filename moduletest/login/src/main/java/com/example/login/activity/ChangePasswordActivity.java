@@ -1,9 +1,8 @@
-package com.example.login;
+package com.example.login.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -12,6 +11,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.login.R;
 import com.example.login.api.Api;
 import com.example.login.api.ApiConfig;
 import com.example.login.api.MyLoginCallback;

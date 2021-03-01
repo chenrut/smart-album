@@ -1,7 +1,6 @@
-package com.example.login;
+package com.example.login.activity;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -13,7 +12,7 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
-import com.example.login.response.Data;
+import com.example.login.R;
 import com.example.login.response.DataResponse;
 import com.example.login.response.LoginResponse;
 import com.example.login.util.MobileUtil;
@@ -91,7 +90,7 @@ public class LoginByYzmActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 String phoneNumber = edt_phoneNumber.getText().toString().trim();
-                Intent intent = new Intent(LoginByYzmActivity.this,LoginByPasswordActivity.class);
+                Intent intent = new Intent(LoginByYzmActivity.this, LoginByPasswordActivity.class);
                 intent.putExtra("phone",phoneNumber);
                 startActivity(intent);
             }

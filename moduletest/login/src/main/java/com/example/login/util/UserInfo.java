@@ -1,4 +1,4 @@
-package com.example.login;
+package com.example.login.util;
 
 public class UserInfo {
     private String account;
